@@ -1,0 +1,8 @@
+--library hxnodejs
+--library ideckia_api
+--dce full
+-D js-es=6
+-cp src
+NuclearItem
+
+--js bin/item/index.js

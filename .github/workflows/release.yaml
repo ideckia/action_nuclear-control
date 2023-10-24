@@ -1,0 +1,72 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+      MAIN_CMD_NAME: nuclear-control
+      ITEM_CMD_NAME: _nuclear-item
+      NOW_PLAYING_CMD_NAME: _nuclear-now-playing-item
+      PLAY_PAUSE_CMD_NAME: _nuclear-play-pause-item
+      HAXE_VERSION: latest
+      NODE_VERSION: 16
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install lix, haxe ${{ env.HAXE_VERSION }} and dependencies
+      run: |
+            npm i -g lix
+            lix install haxe ${{ env.HAXE_VERSION }}
+            lix download
+
+    - name: Compile project
+      run: haxe deploy_all.hxml
+
+    - name: Create main directory to release
+      run: |
+        mkdir ${{ env.MAIN_CMD_NAME }}
+        mv bin/index.js ${{ env.MAIN_CMD_NAME }}
+        mv presets.json ${{ env.MAIN_CMD_NAME }}
+        mv readme.md ${{ env.MAIN_CMD_NAME }}
+        echo '{"repository": "http://github.com/${{ github.repository }}","filename": "${{ env.MAIN_CMD_NAME }}.zip","version": "${{ github.ref_name }}"}' > ${{ env.MAIN_CMD_NAME }}/.info
+
+    - name: Create item directory to release
+      run: |
+        mkdir ${{ env.ITEM_CMD_NAME }}
+        mv bin/item/index.js ${{ env.ITEM_CMD_NAME }}
+
+    - name: Create now-playing-item directory to release
+      run: |
+        mkdir ${{ env.NOW_PLAYING_CMD_NAME }}
+        mv bin/now-playing-item/index.js ${{ env.NOW_PLAYING_CMD_NAME }}
+
+    - name: Create play-pause-item directory to release
+      run: |
+        mkdir ${{ env.PLAY_PAUSE_CMD_NAME }}
+        mv bin/play-pause-item/index.js ${{ env.PLAY_PAUSE_CMD_NAME }}
+
+    - name: Package release
+      run: |
+        zip -r ${{ env.MAIN_CMD_NAME }} ${{ env.MAIN_CMD_NAME }} ${{ env.ITEM_CMD_NAME }} ${{ env.NOW_PLAYING_CMD_NAME }} ${{ env.PLAY_PAUSE_CMD_NAME }}
+
+    - name: Release
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        files: ${{ env.MAIN_CMD_NAME }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

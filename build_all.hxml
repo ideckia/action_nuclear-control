@@ -1,0 +1,7 @@
+build_control.hxml
+--next
+build_item.hxml
+--next
+build_play-pause-item.hxml
+--next
+build_now-playing-item.hxml

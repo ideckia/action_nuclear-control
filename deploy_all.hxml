@@ -1,0 +1,7 @@
+deploy_control.hxml
+--next
+deploy_item.hxml
+--next
+deploy_play-pause-item.hxml
+--next
+deploy_now-playing-item.hxml
