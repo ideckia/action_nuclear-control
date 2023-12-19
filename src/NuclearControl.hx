@@ -1,5 +1,7 @@
 package;
 
+import api.action.Data;
+
 using api.IdeckiaApi;
 
 typedef Props = {
@@ -10,26 +12,26 @@ typedef Props = {
 @:name("nuclear-control")
 @:description("Action to control Nuclear music player")
 class NuclearControl extends IdeckiaAction {
-	static var ICON = ImageData.embed('img/nuclear_icon.png');
-	static var PREVIOUS = ImageData.embed('img/previous.png');
-	static var NEXT = ImageData.embed('img/next.png');
-	static var PLAY = ImageData.embed('img/play.png');
-	static var PAUSE = ImageData.embed('img/pause.png');
+	static var ICON = Data.embedBase64('img/nuclear_icon.png');
+	static var PREVIOUS = Data.embedBase64('img/previous.png');
+	static var NEXT = Data.embedBase64('img/next.png');
+	static var PLAY = Data.embedBase64('img/play.png');
+	static var PAUSE = Data.embedBase64('img/pause.png');
 
 	override function init(initialState:ItemState):js.lib.Promise<ItemState> {
-		var runtimeImg = ImageData.get('img/nuclear_icon.png');
+		var runtimeImg = Data.getBase64('img/nuclear_icon.png');
 		if (runtimeImg != null)
 			ICON = runtimeImg;
-		runtimeImg = ImageData.get('img/previous.png');
+		runtimeImg = Data.getBase64('img/previous.png');
 		if (runtimeImg != null)
 			PREVIOUS = runtimeImg;
-		runtimeImg = ImageData.get('img/next.png');
+		runtimeImg = Data.getBase64('img/next.png');
 		if (runtimeImg != null)
 			NEXT = runtimeImg;
-		runtimeImg = ImageData.get('img/play.png');
+		runtimeImg = Data.getBase64('img/play.png');
 		if (runtimeImg != null)
 			PLAY = runtimeImg;
-		runtimeImg = ImageData.get('img/pause.png');
+		runtimeImg = Data.getBase64('img/pause.png');
 		if (runtimeImg != null)
 			PAUSE = runtimeImg;
 
