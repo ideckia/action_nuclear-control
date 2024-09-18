@@ -1,0 +1,38 @@
+[
+	{
+		"id": "control_action_description",
+		"text": "Nuclear music player kontrolatzeko ekintza"
+	},
+	{
+		"id": "play_pause_action_description",
+		"text": "Play-pause erakusten duen Nuclear kontrol itema"
+	},
+	{
+		"id": "now_playing_action_description",
+		"text": "Uneko abestiaren informazioa erakusten duen Nuclear kontrol itema"
+	},
+	{
+		"id": "item_action_description",
+		"text": "Nuclear kontrol itema"
+	},
+	{
+		"id": "prop_port",
+		"text": "API-ak darabilen portua"
+	},
+	{
+		"id": "prop_action",
+		"text": "Item honek exekutatuko duen ekintza"
+	},
+	{
+		"id": "connect_error",
+		"text": "Ezin izan da nucliear-en API-rekin konektatu [http://localhost:{0}/nuclear/player/]: {1}"
+	},
+	{
+		"id": "paused",
+		"text": "etenda"
+	},
+	{
+		"id": "playing",
+		"text": "martxan"
+	}
+]

@@ -1,0 +1,38 @@
+[
+	{
+		"id": "control_action_description",
+		"text": "Action to control Nuclear music player"
+	},
+	{
+		"id": "play_pause_action_description",
+		"text": "A Nuclear control item that shows play-pause"
+	},
+	{
+		"id": "now_playing_action_description",
+		"text": "A Nuclear control item that shows the 'now-playing' information"
+	},
+	{
+		"id": "item_action_description",
+		"text": "A Nuclear control item"
+	},
+	{
+		"id": "prop_port",
+		"text": "Port used by the API"
+	},
+	{
+		"id": "prop_action",
+		"text": "Action to execute by this item"
+	},
+	{
+		"id": "connect_error",
+		"text": "Could not connect to nuclear API in [http://localhost:{0}/nuclear/player/]: {1}"
+	},
+	{
+		"id": "paused",
+		"text": "paused"
+	},
+	{
+		"id": "playing",
+		"text": "playing"
+	}
+]

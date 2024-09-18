@@ -3,12 +3,13 @@ package;
 using api.IdeckiaApi;
 
 typedef Props = {
-	@:editable("Port used by the API", 3100)
+	@:editable("prop_port", 3100)
 	var port:Int;
 }
 
 @:name("nuclear-now-playing-item")
-@:description("A Nuclear control item that shows the 'now-playing' information")
+@:description("now_playing_action_description")
+@:localize
 class NuclearNowPlayingItem extends IdeckiaAction {
 	var prevArtist = 'artist';
 	var prevName = 'name';
@@ -22,7 +23,7 @@ class NuclearNowPlayingItem extends IdeckiaAction {
 				updateTimer = new haxe.Timer(3000);
 				updateTimer.run = () -> {
 					updateInfo(currentState).then(updatedState -> {
-						server.updateClientState(updatedState);
+						core.updateClientState(updatedState);
 					});
 				}
 			}
@@ -64,10 +65,10 @@ class NuclearNowPlayingItem extends IdeckiaAction {
 
 				CallHttp.callEndpoint(npResp.thumbnail)
 					.then(data -> state.icon = haxe.crypto.Base64.encode(data))
-					.catchError(e -> server.log.error('Error getting ${npResp.thumbnail} thumbnail: $e'))
+					.catchError(e -> core.log.error('Error getting ${npResp.thumbnail} thumbnail: $e'))
 					.finally(() -> resolve(state));
 			}).catchError(e -> {
-				server.log.error('nuclear error: $e');
+				core.log.error('nuclear error: $e');
 				reject(e);
 			});
 		});

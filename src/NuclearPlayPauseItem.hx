@@ -3,14 +3,15 @@ package;
 using api.IdeckiaApi;
 
 typedef Props = {
-	@:editable("Port used by the API", 3100)
+	@:editable("prop_port", 3100)
 	var port:Int;
 	var play_icon:String;
 	var pause_icon:String;
 }
 
 @:name("nuclear-play-pause-item")
-@:description("A Nuclear control item that shows play-pause")
+@:description("play_pause_action_description")
+@:localize
 class NuclearPlayPauseItem extends IdeckiaAction {
 	override function init(initialState:ItemState):js.lib.Promise<ItemState> {
 		return new js.lib.Promise((resolve, reject) -> {
@@ -30,7 +31,7 @@ class NuclearPlayPauseItem extends IdeckiaAction {
 				.then(response -> {
 					updateInfo(currentState).then(newState -> resolve(new ActionOutcome({state: newState})));
 				})
-				.catchError(e -> server.log.error('nuclear error: $e'))
+				.catchError(e -> core.log.error('nuclear error: $e'))
 				.finally(() -> resolve(new ActionOutcome({state: currentState})));
 		});
 	}
@@ -43,13 +44,13 @@ class NuclearPlayPauseItem extends IdeckiaAction {
 
 					if (npResp.playbackStatus == 'PAUSED') {
 						state.icon = props.play_icon;
-						state.text = 'paused';
+						state.text = Loc.paused.tr();
 					} else if (npResp.playbackStatus == 'PLAYING') {
 						state.icon = props.pause_icon;
-						state.text = 'playing';
+						state.text = Loc.playing.tr();
 					}
 				})
-				.catchError(e -> server.log.error('nuclear error: $e'))
+				.catchError(e -> core.log.error('nuclear error: $e'))
 				.finally(() -> resolve(state));
 		});
 	}

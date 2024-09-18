@@ -1,16 +1,15 @@
 package;
 
-import api.action.Data;
-
 using api.IdeckiaApi;
 
 typedef Props = {
-	@:editable("Port used by the API", 3100)
+	@:editable("prop_port", 3100)
 	var port:Int;
 }
 
 @:name("nuclear-control")
-@:description("Action to control Nuclear music player")
+@:description("control_action_description")
+@:localize
 class NuclearControl extends IdeckiaAction {
 	static var ICON = Data.embedBase64('img/nuclear_icon.png');
 	static var PREVIOUS = Data.embedBase64('img/previous.png');
@@ -19,19 +18,19 @@ class NuclearControl extends IdeckiaAction {
 	static var PAUSE = Data.embedBase64('img/pause.png');
 
 	override function init(initialState:ItemState):js.lib.Promise<ItemState> {
-		var runtimeImg = Data.getBase64('img/nuclear_icon.png');
+		var runtimeImg = core.data.getBase64('img/nuclear_icon.png');
 		if (runtimeImg != null)
 			ICON = runtimeImg;
-		runtimeImg = Data.getBase64('img/previous.png');
+		runtimeImg = core.data.getBase64('img/previous.png');
 		if (runtimeImg != null)
 			PREVIOUS = runtimeImg;
-		runtimeImg = Data.getBase64('img/next.png');
+		runtimeImg = core.data.getBase64('img/next.png');
 		if (runtimeImg != null)
 			NEXT = runtimeImg;
-		runtimeImg = Data.getBase64('img/play.png');
+		runtimeImg = core.data.getBase64('img/play.png');
 		if (runtimeImg != null)
 			PLAY = runtimeImg;
-		runtimeImg = Data.getBase64('img/pause.png');
+		runtimeImg = core.data.getBase64('img/pause.png');
 		if (runtimeImg != null)
 			PAUSE = runtimeImg;
 
@@ -41,14 +40,12 @@ class NuclearControl extends IdeckiaAction {
 	}
 
 	override public function getStatus() {
-		server.log.info('nuclear getStatus');
-
 		return new js.lib.Promise<ActionStatus>((resolve, _) -> {
 			function handleError(e) {
-				server.log.error('nuclear error: $e');
+				core.log.error('nuclear error: $e');
 				resolve({
 					code: ActionStatusCode.error,
-					message: 'Could not connect to nuclear API in [http://localhost:${props.port}/nuclear/player/]: $e'
+					message: Loc.connect_error.tr([(props.port), e])
 				});
 			}
 			js.Node.process.once('uncaughtException', handleError);
