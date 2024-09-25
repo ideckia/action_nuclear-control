@@ -41,25 +41,25 @@ jobs:
         mv bin/index.js ${{ env.MAIN_CMD_NAME }}
         mv presets.json ${{ env.MAIN_CMD_NAME }}
         mv readme.md ${{ env.MAIN_CMD_NAME }}
-        mv loc ${{ env.CMD_NAME }}
+        cp -r loc ${{ env.MAIN_CMD_NAME }}
         echo '{"repository": "http://github.com/${{ github.repository }}","filename": "${{ env.MAIN_CMD_NAME }}.zip","version": "${{ github.ref_name }}"}' > ${{ env.MAIN_CMD_NAME }}/.info
 
     - name: Create item directory to release
       run: |
         mkdir ${{ env.ITEM_CMD_NAME }}
-        mv loc ${{ env.CMD_NAME }}
+        cp -r loc ${{ env.ITEM_CMD_NAME }}
         mv bin/item/index.js ${{ env.ITEM_CMD_NAME }}
 
     - name: Create now-playing-item directory to release
       run: |
         mkdir ${{ env.NOW_PLAYING_CMD_NAME }}
-        mv loc ${{ env.CMD_NAME }}
+        cp -r loc ${{ env.NOW_PLAYING_CMD_NAME }}
         mv bin/now-playing-item/index.js ${{ env.NOW_PLAYING_CMD_NAME }}
 
     - name: Create play-pause-item directory to release
       run: |
         mkdir ${{ env.PLAY_PAUSE_CMD_NAME }}
-        mv loc ${{ env.CMD_NAME }}
+        cp -r loc ${{ env.PLAY_PAUSE_CMD_NAME }}
         mv bin/play-pause-item/index.js ${{ env.PLAY_PAUSE_CMD_NAME }}
 
     - name: Package release
