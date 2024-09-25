@@ -9,7 +9,7 @@ typedef Props = {
 	var pause_icon:String;
 }
 
-@:name("nuclear-play-pause-item")
+@:name("_nuclear-play-pause-item")
 @:description("play_pause_action_description")
 @:localize
 class NuclearPlayPauseItem extends IdeckiaAction {

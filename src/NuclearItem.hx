@@ -9,7 +9,7 @@ typedef Props = {
 	var action:String;
 }
 
-@:name("nuclear-item")
+@:name("_nuclear-item")
 @:description("item_action_description")
 @:localize
 class NuclearItem extends IdeckiaAction {

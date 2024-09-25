@@ -7,7 +7,7 @@ typedef Props = {
 	var port:Int;
 }
 
-@:name("nuclear-now-playing-item")
+@:name("_nuclear-now-playing-item")
 @:description("now_playing_action_description")
 @:localize
 class NuclearNowPlayingItem extends IdeckiaAction {
