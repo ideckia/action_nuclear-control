@@ -42,12 +42,12 @@ class NuclearPlayPauseItem extends IdeckiaAction {
 				.then(response -> {
 					var npResp:Types.NowPlayingResponse = haxe.Json.parse(response);
 
+					state.text = '{b:${npResp.artist}}\n${npResp.name}';
+
 					if (npResp.playbackStatus == 'PAUSED') {
 						state.icon = props.play_icon;
-						state.text = Loc.paused.tr();
 					} else if (npResp.playbackStatus == 'PLAYING') {
 						state.icon = props.pause_icon;
-						state.text = Loc.playing.tr();
 					}
 				})
 				.catchError(e -> core.log.error('nuclear error: $e'))

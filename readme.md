@@ -2,7 +2,7 @@
 
 ## Description
 
-Action to control [Nuclear](https://nuclear.js.org) music player. First of all you have to enable API in the Nuclear player itself.
+Action to control [Nuclear](https://nuclearplayer.com/) music player. First of all you have to enable API in the Nuclear player itself.
 
 `Settings->HTTP API->Check 'Enable the api'`
 

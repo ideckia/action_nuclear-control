@@ -28,11 +28,11 @@
 		"text": "Could not connect to nuclear API in [http://localhost:{0}/nuclear/player/]: {1}"
 	},
 	{
-		"id": "paused",
-		"text": "paused"
+		"id": "open_nuclear_title",
+		"text": "Open Nuclear?"
 	},
 	{
-		"id": "playing",
-		"text": "playing"
+		"id": "open_nuclear_body",
+		"text": "Nuclear is not launched. Do you want to launch it?"
 	}
 ]

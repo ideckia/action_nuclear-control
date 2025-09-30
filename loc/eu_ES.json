@@ -28,11 +28,11 @@
 		"text": "Ezin izan da nucliear-en API-rekin konektatu [http://localhost:{0}/nuclear/player/]: {1}"
 	},
 	{
-		"id": "paused",
-		"text": "etenda"
+		"id": "open_nuclear_title",
+		"text": "Ireki Nuclear?"
 	},
 	{
-		"id": "playing",
-		"text": "martxan"
+		"id": "open_nuclear_body",
+		"text": "Nuclear ez da martxan aurkitu, ireki nahi duzu?"
 	}
 ]

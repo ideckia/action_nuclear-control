@@ -17,8 +17,6 @@ class NuclearNowPlayingItem extends IdeckiaAction {
 
 	override function show(currentState:ItemState):js.lib.Promise<ItemState> {
 		return new js.lib.Promise((resolve, reject) -> {
-			currentState.text = '{b:$prevArtist}\n$prevName';
-
 			if (updateTimer == null) {
 				updateTimer = new haxe.Timer(3000);
 				updateTimer.run = () -> {
@@ -32,7 +30,11 @@ class NuclearNowPlayingItem extends IdeckiaAction {
 				resolve(updatedState);
 			}).catchError(reject);
 		});
-	};
+	}
+
+	override function deinit() {
+		hide();
+	}
 
 	override public function hide() {
 		if (updateTimer != null) {
@@ -58,14 +60,18 @@ class NuclearNowPlayingItem extends IdeckiaAction {
 
 				prevArtist = npResp.artist;
 				prevName = npResp.name;
-				state.text = '{b:${npResp.artist}}\n${npResp.name}';
 				if (npResp.thumbnail == null) {
+					state.text = '{b:${npResp.artist}}\n${npResp.name}';
 					resolve(state);
+					return;
 				}
 
 				CallHttp.callEndpoint(npResp.thumbnail)
 					.then(data -> state.icon = haxe.crypto.Base64.encode(data))
-					.catchError(e -> core.log.error('Error getting ${npResp.thumbnail} thumbnail: $e'))
+					.catchError(e -> {
+						core.log.error('Error getting ${npResp.thumbnail} thumbnail: $e');
+						state.text = '{b:${npResp.artist}}\n${npResp.name}';
+					})
 					.finally(() -> resolve(state));
 			}).catchError(e -> {
 				core.log.error('nuclear error: $e');
