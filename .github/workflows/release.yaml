@@ -15,7 +15,7 @@ jobs:
       ITEM_CMD_NAME: _nuclear-item
       NOW_PLAYING_CMD_NAME: _nuclear-now-playing-item
       PLAY_PAUSE_CMD_NAME: _nuclear-play-pause-item
-      HAXE_VERSION: latest
+      HAXE_VERSION: 4.2.4
       NODE_VERSION: 16
 
     steps:
